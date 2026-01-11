@@ -9,17 +9,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Historial'),
+        title: const Text('Historial'),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete_forever),
+            icon: const Icon(Icons.delete_forever),
             onPressed: () {},
           )
         ],
       ),
-      body: _HomeScreenBody(),
-      bottomNavigationBar: CustomNavigationBar(),
-      floatingActionButton: ScanButton(),
+      body: const _HomeScreenBody(),
+      bottomNavigationBar: const CustomNavigationBar(),
+      floatingActionButton: const ScanButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -31,17 +31,17 @@ class _HomeScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Canviar per a anar canviant entre pantalles
-    final currentIndex = 1;
+    const currentIndex = 1;
 
     switch (currentIndex) {
       case 0:
-        return MapasScreen();
+        return const MapasScreen();
 
       case 1:
-        return DireccionsScreen();
+        return const DireccionsScreen();
 
       default:
-        return MapasScreen();
+        return const MapasScreen();
     }
   }
 }

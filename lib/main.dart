@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scan/screens/home_screen.dart';
-import 'package:qr_scan/screens/mapa_screen.dart';
+import 'package:qr_scan/screens/mapa_screen.dart'; 
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,15 +14,15 @@ class MyApp extends StatelessWidget {
       title: 'QR Reader',
       initialRoute: 'home',
       routes: {
-        'home': (_) => HomeScreen(),
-        'mapa': (_) => MapaScreen(),
+        'home': (_) => const HomeScreen(),
+        'mapa': (_) => const MapaScreen(),
       },
       theme: ThemeData(
         // No es pot emprar colorPrimary des de l'actualització de Flutter
-        colorScheme: ColorScheme.light().copyWith(
+        colorScheme: const ColorScheme.light().copyWith(
           primary: Colors.deepPurple,
         ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.deepPurple,
         ),
       ),
