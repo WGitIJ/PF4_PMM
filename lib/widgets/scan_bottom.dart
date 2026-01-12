@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_scan/providers/scan_list_provider.dart';
+import 'package:qr_scan/screens/scanner_screen.dart';
 
 class ScanButton extends StatelessWidget {
   const ScanButton({Key? key}) : super(key: key);
@@ -12,15 +13,21 @@ class ScanButton extends StatelessWidget {
       child: const Icon(
         Icons.filter_center_focus,
       ),
-      onPressed: () {
+      onPressed: () async {
         print('Botó polsat!');
-        String barcodeScanRes = 'https://flutter.dev';
-        final ScanListProvider scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
-        scanListProvider.nuevoScan(barcodeScanRes);
-        String barcodeScanRes1 = 'geo:40.689247,-74.044502';
-        final ScanListProvider scanListProvider1 = Provider.of<ScanListProvider>(context, listen: false);
-        scanListProvider1.nuevoScan(barcodeScanRes1);
+
+        // Abrir la pantalla de escáner
+        final barcodeScanRes = await Navigator.push<String>(
+          context,
+          MaterialPageRoute(builder: (_) => const ScannerPage()),
+        );
+        if (barcodeScanRes != null && barcodeScanRes.isNotEmpty) {
+          final scanListProvider =
+              Provider.of<ScanListProvider>(context, listen: false);
+          scanListProvider.nuevoScan(barcodeScanRes);
+        }
       },
     );
   }
+
 }
