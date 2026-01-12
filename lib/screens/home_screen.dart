@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_scan/models/scan_model.dart';
 import 'package:qr_scan/providers/db_provider.dart';
+import 'package:qr_scan/providers/scan_list_provider.dart';
 import 'package:qr_scan/providers/ui_provider.dart';
 import 'package:qr_scan/screens/screens.dart';
 import 'package:qr_scan/widgets/widgets.dart';
@@ -17,7 +18,9 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.delete_forever),
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<ScanListProvider>(context, listen: false).borrarTots();
+            },
           )
         ],
       ),
@@ -38,17 +41,16 @@ class _HomeScreenBody extends StatelessWidget {
     // Canviar per a anar canviant entre pantalles
     final currentIndex = uiProvider.selectedMenuOpt;
 
-    //CREACION TEMPORAL DE LA BASE DE DATOS
-    DBProvider.db.database; // Inicialitza la base de dades
-    ScanModel newScan = ScanModel(valor: 'http://google.com'); // Exemple de nou scan
-    DBProvider.db.insertScan(newScan); // Inserció del nou scan
+    final ScanListProvider scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
    
 
     switch (currentIndex) {
       case 0:
+      scanListProvider.cargarScansPerTipus('geo');
         return const MapasScreen();
 
       case 1:
+      scanListProvider.cargarScansPerTipus('http');
         return const DireccionsScreen();
 
       default:
